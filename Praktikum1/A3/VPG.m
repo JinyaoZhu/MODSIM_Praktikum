@@ -21,7 +21,7 @@
 %        h: new step size
 %        d_state: new states of the Hysteresemodul
 %        ldf: local discrete error
-function [u, x, y, h, d_state, ldf] = VPG(model_name,x,t,h,d_state,use_var_step,eps,sys_param)
+function [u, x, y, h, d_state, ldf] = VPG(model_name,x,t,h,d_state,use_var_step,sys_param,eps)
 
 if isempty(sys_param.h_min)||isempty(sys_param.h_max)
     h_min = 1e-20;

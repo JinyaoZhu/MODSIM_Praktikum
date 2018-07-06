@@ -36,7 +36,7 @@ timerStart = tic;
 while t <= t_stop
     x_values(i,:) = x;
     [u,x,y,h,d_state,ldf] = VPG(model_name,x,t,h,d_state,...
-                        params.var_step_size,params.eps_ldf,params);
+                        params.var_step_size,params,params.eps_ldf);
     y_values(i,:) = y;
     t_values(i)   = t;
     h_hist(i) = h; % save to step size history
