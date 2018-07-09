@@ -1,23 +1,23 @@
 % MODSIM Laborpraktikum, 1. Aufgabe
 % Prof. K. Janschek, Dr.-Ing. Th. Range, Dr.-Ing. S. Dyblenko
 %
-% main_a1.m - Realisierung der VPG-Methode mit Fehlersch?tzung
-% f��r PT1-Glied
-% zu erg?nzende Codezeilen sind mit ">>> erg?nzen ...." und ...��gekennzeichnet
+% main_a1.m - Realisierung der VPG-Methode mit Fehlerschaetzung
+% fuer PT1-Glied
+% zu ergaenzende Codezeilen sind mit ">>> ergaenzen ...." und ..." gekennzeichnet
 %---------------------------------------------------------+
 %                   MODSIM GRUPPE 11                      |
 % Mitglieder: Cao,Bozhi  Gao,Yue  Jia,Xuehua  Zhu,Jinyao  |
 % TU Dresden, 31.05.2018                                  |
 %---------------------------------------------------------+
-clear all % L?sche Arbeitsspeicher
+clear all % Loesche Arbeitsspeicher
 close all;
 u_max = u_step(1e9); % amplitude of the step input
 Tm = 10; % Konstante des PT1, [s]
 h = 0.5; % Schrittweite, (s)
 t0 = 0; % Integrationsbeginn, [s]
 tf = 300; % Integrationsende, [s]
-t = []; % Zeitwerte f��r Plot [s]
-d = []; % Fehler-Sch?tzwerte
+t = []; % Zeitwerte fuer Plot [s]
+d = []; % Fehler-Schaetzwerte
 u = []; % Stellwerte u(t)
 y = []; % Ausgangswerte y(t)
 ys = []; % Soll-Ausgangswerte y_soll(t)
@@ -40,16 +40,17 @@ while ti <= tf
     ys(i) = u(i)*(1-exp(-(ti-step_time)/Tm));
     % Berechnung des Ausgangswertes
     y(i) = system_pt1( ti , x(i) , u(i) , 3); 
-    % Berechnung der Koeffizienten f��r VPG-Methode
+    % Berechnung der Koeffizienten fuer VPG-Methode
     k1 = system_pt1( ti , x(i) , u_step(ti) , 1); 
     k2 = system_pt1( ti+h/2 , x(i)+k1*h/2 , u_step(ti+h/2) , 1); 
     k3 = system_pt1( ti+h , x(i)-h*k1+2*h*k2 , u_step(ti+h) , 1); 
     % Wichtiger Hinweis: Die Parameter bei den Aufrufen von system_pt1(...)
-    % m��ssen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
+    % muessen unter Beachtung von jeweiligen Zeitpunkten bestimmt werden!
     % Berechnung des Zustands-Sch?tzwertes x(ti+h)
     x(i+1) = x(i)+h*k2;
-    % Berechnung der LDF Fehlerabsch?tzung d(ti+h)
+    % Berechnung der LDF Fehlerabschaetzung d(ti+h)
     d(i+1) = h*(k1-2*k2+k3)/6;
+    
     d_norm = abs(d(i+1));
     
     % calculate new step size
@@ -66,8 +67,8 @@ while ti <= tf
     end
     
     h_hist(i) = h; % remember step size
-    t(i) = ti; % Zeitwert f��r Plot speichern
-    ti = ti + h; % Zeitvariable um einen Schritt erh?hen
+    t(i) = ti; % Zeitwert fuer Plot speichern
+    ti = ti + h; % Zeitvariable um einen Schritt erhoehen
     i = i + 1; % Index inkrementieren
 end
 tElapsed = toc(tStart)*1000;

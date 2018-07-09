@@ -23,13 +23,8 @@
 %        ldf: local discrete error
 function [u, x, y, h, d_state, ldf] = VPG(model_name,x,t,h,d_state,use_var_step,sys_param,eps)
 
-if isempty(sys_param.h_min)||isempty(sys_param.h_max)
-    h_min = 1e-20;
-    h_max = 20;
-else
-    h_min = sys_param.h_min;
-    h_max = sys_param.h_max;
-end
+h_min = sys_param.h_min;
+h_max = sys_param.h_max;
 
 % if no epsilon given use default value
 if nargin == 7  
