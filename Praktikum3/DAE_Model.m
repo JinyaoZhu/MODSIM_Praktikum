@@ -1,5 +1,8 @@
-clear all;
-close all;
+%---------------------------------------------------------+
+%                   MODSIM GRUPPE 11                      |
+% Mitglieder: Cao,Bozhi  Gao,Yue  Jia,Xuehua  Zhu,Jinyao  |
+% TU Dresden, 28.06.2018                                  |
+%---------------------------------------------------------+
 %=======================================================
 %                     Schema
 %               +--------+
@@ -13,6 +16,8 @@ close all;
 %     |                             |           |
 %     +-----------------------------+-----------+
 %=======================================================
+clear all;
+close all;
 %% PARAMETERS of the DAE-Model
 % if using single precision
 use_single = true;
